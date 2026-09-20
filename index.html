@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>“打野”热潮下的生态与安全图谱</title>
+    <style>
+        /* ========== 全局重置 ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+            background-color: #f5f2eb;
+            color: #2e3b2e;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* ========== 颜色变量 ========== */
+        :root {
+            --green-dark: #3a5e3a;
+            --green-mid: #5a8f5a;
+            --green-light: #a8c9a8;
+            --green-pale: #e8f0e8;
+            --brown: #8b7355;
+            --orange: #e07a5f;
+            --cream: #f5f2eb;
+            --text-dark: #2e3b2e;
+            --text-light: #6a8a6a;
+            --white: #ffffff;
+        }
+
+        /* ========== 容器 ========== */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ========== 序章 ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(160deg, #e8f0e8 0%, #d4e6d4 40%, #c8ddc8 100%);
+            position: relative;
+            padding: 60px 24px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><path d="M20 90 Q35 65 50 90 T80 90 T110 90" stroke="%235a8f5a" fill="none" opacity="0.08" stroke-width="2"/><circle cx="18" cy="25" r="10" fill="%235a8f5a" opacity="0.06"/><circle cx="95" cy="35" r="15" fill="%235a8f5a" opacity="0.05"/><circle cx="60" cy="15" r="6" fill="%235a8f5a" opacity="0.07"/></svg>');
+            background-size: 240px;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 3.6rem;
+            font-weight: 800;
+            color: var(--green-dark);
+            margin-bottom: 16px;
+            letter-spacing: 6px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.06);
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            color: #5a7a5a;
+            margin-bottom: 44px;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 4px;
+            font-weight: 300;
+        }
+
+        .hero .hook-text {
+            font-size: 1.1rem;
+            color: #4a6a4a;
+            max-width: 580px;
+            margin: 0 auto 36px;
+            position: relative;
+            z-index: 1;
+            line-height: 2.2;
+        }
+
+        .hero .hook-text .highlight {
+            color: var(--orange);
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            margin: 44px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--green-dark);
+            display: block;
+            line-height: 1.2;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .stat-label {
+            font-size: 0.88rem;
+            color: #6a8a6a;
+            letter-spacing: 2px;
+        }
+
+        .hero-footer {
+            position: absolute;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            color: var(--green-mid);
+            font-size: 0.88rem;
+            letter-spacing: 3px;
+            opacity: 0.7;
+        }
+
+        /* ========== 通用 Section ========== */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--green-dark);
+            text-align: center;
+            margin-bottom: 12px;
+            letter-spacing: 3px;
+        }
+
+        .section-desc {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 50px;
+            font-size: 1rem;
+            max-width: 680px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.9;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 3px;
+            background: var(--green-light);
+            margin: 0 auto 50px;
+            border-radius: 2px;
+        }
+
+        /* ========== 热度地图 ========== */
+        .map-section {
+            background: #fff;
+        }
+
+        .map-wrapper {
+            display: flex;
+            gap: 36px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .map-visual {
+            flex: 1 1 560px;
+            min-height: 440px;
+            background: #fafcf8;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-svg-wrapper {
+            width: 100%;
+            max-width: 480px;
+            position: relative;
+        }
+
+        .map-svg-wrapper svg {
+            width: 100%;
+            height: auto;
+        }
+
+        .rank-container {
+            flex: 0 0 300px;
+            background: #fafcf8;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            padding: 24px;
+        }
+
+        .rank-container h3 {
+            font-size: 1.05rem;
+            color: var(--green-dark);
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--green-pale);
+            letter-spacing: 1px;
+        }
+
+        .rank-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eef3ee;
+        }
+
+        .rank-item:last-child {
+            border-bottom: none;
+        }
+
+        .rank-num {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--green-pale);
+            color: var(--green-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.78rem;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .rank-item:nth-child(1) .rank-num { background: #e07a5f; color: #fff; }
+        .rank-item:nth-child(2) .rank-num { background: #f2cc8f; color: #6a4a2a; }
+        .rank-item:nth-child(3) .rank-num { background: #b8d4b8; color: #2e3b2e; }
+
+        .rank-name {
+            flex: 1;
+            font-weight: 600;
+            color: var(--green-dark);
+            font-size: 0.92rem;
+        }
+
+        .rank-value {
+            font-weight: 700;
+            color: var(--orange);
+            font-size: 0.88rem;
+        }
+
+        .map-note {
+            text-align: center;
+            font-size: 0.82rem;
+            color: #8a9a8a;
+            margin-top: 24px;
+        }
+
+        /* ========== 词云 ========== */
+        .wordcloud-section {
+            background: var(--cream);
+        }
+
+        .wordcloud-box {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            padding: 40px 30px;
+            text-align: center;
+            line-height: 1;
+            margin-bottom: 48px;
+        }
+
+        .wordcloud-box span {
+            display: inline-block;
+            margin: 6px 10px;
+            line-height: 1.2;
+        }
+
+        .wc-xl { font-size: 2.8rem; font-weight: 800; }
+        .wc-lg { font-size: 2.0rem; font-weight: 700; }
+        .wc-md { font-size: 1.5rem; font-weight: 600; }
+        .wc-sm { font-size: 1.1rem; font-weight: 500; }
+        .wc-xs { font-size: 0.85rem; font-weight: 400; }
+
+        .wc-green-dark { color: #3a5e3a; }
+        .wc-green-mid { color: #5a8f5a; }
+        .wc-green-light { color: #7aad7a; }
+        .wc-orange { color: #e07a5f; }
+        .wc-brown { color: #8b7355; }
+        .wc-red { color: #c0392b; }
+
+        /* ========== 野菜图鉴 ========== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 22px;
+            margin-bottom: 50px;
+        }
+
+        .plant-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 3px 18px rgba(0, 0, 0, 0.06);
+            padding: 22px 18px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .plant-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+        }
+
+        .plant-emoji {
+            font-size: 2.6rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .plant-name {
+            font-weight: 700;
+            color: var(--green-dark);
+            font-size: 1.08rem;
+            margin-bottom: 4px;
+        }
+
+        .plant-heat {
+            font-size: 0.78rem;
+            color: var(--orange);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .plant-desc {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .risk-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 0.68rem;
+            padding: 2px 9px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .risk-low { background: #d4edda; color: #2e7d32; }
+        .risk-mid { background: #fff3cd; color: #b8860b; }
+        .risk-high { background: #f8d7da; color: #c0392b; }
+
+        /* ========== 易混淆对比 ========== */
+        .compare-section {
+            margin-top: 50px;
+        }
+
+        .compare-section h3 {
+            text-align: center;
+            color: var(--green-dark);
+            margin-bottom: 30px;
+            font-size: 1.25rem;
+            letter-spacing: 2px;
+        }
+
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .compare-pair {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 3px 18px rgba(0, 0, 0, 0.06);
+            padding: 22px;
+            text-align: center;
+        }
+
+        .compare-pair .pair-label {
+            font-size: 0.78rem;
+            color: #8a9a8a;
+            letter-spacing: 2px;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+        }
+
+        .compare-pair .pair-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 10px 0;
+        }
+
+        .compare-pair .pair-item:first-of-type {
+            border-bottom: 1px dashed #e0ebe0;
+        }
+
+        .compare-pair .pair-emoji {
+            font-size: 1.8rem;
+        }
+
+        .compare-pair .pair-text {
+            text-align: left;
+        }
+
+        .compare-pair .pair-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .compare-pair .pair-name.safe { color: #2e7d32; }
+        .compare-pair .pair-name.danger { color: #c0392b; }
+
+        .compare-pair .pair-note {
+            font-size: 0.75rem;
+            color: #8a9a8a;
+        }
+
+        /* ========== 趋势图 ========== */
+        .trend-section {
+            background: #fff;
+        }
+
+        .trend-chart-static {
+            background: #fafcf8;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            padding: 40px 30px 30px;
+            margin-bottom: 30px;
+        }
+
+        .trend-legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.red { background: #e07a5f; }
+        .legend-dot.blue { background: #5a8f5a; }
+        .legend-dot.gold { background: #f2cc8f; }
+
+        .trend-svg-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .trend-svg-wrapper svg {
+            width: 100%;
+            min-width: 600px;
+            height: auto;
+        }
+
+        .trend-insight {
+            background: var(--green-pale);
+            border-left: 4px solid var(--green-mid);
+            padding: 22px 28px;
+            border-radius: 0 14px 14px 0;
+            color: #4a6a4a;
+            font-size: 0.92rem;
+            line-height: 2;
+        }
+
+        .trend-insight strong {
+            color: var(--green-dark);
+        }
+
+        /* ========== 安全测试（交互式） ========== */
+        .quiz-section {
+            background: var(--cream);
+        }
+
+        .quiz-interactive {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .quiz-item {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            padding: 30px 32px;
+            margin-bottom: 24px;
+            transition: box-shadow 0.3s;
+        }
+
+        .quiz-item.answered {
+            box-shadow: 0 4px 24px rgba(90, 143, 90, 0.12);
+        }
+
+        .quiz-q-num {
+            display: inline-block;
+            background: var(--green-mid);
+            color: #fff;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 3px 14px;
+            border-radius: 12px;
+            margin-bottom: 14px;
+            letter-spacing: 1px;
+        }
+
+        .quiz-q-text {
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: var(--green-dark);
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+
+        .quiz-opts {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .quiz-opts li {
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            background: #fafcf8;
+            border: 2px solid #eef3ee;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+            user-select: none;
+        }
+
+        .quiz-opts li:hover:not(.disabled) {
+            border-color: var(--green-light);
+            background: #f0f7f0;
+            transform: translateX(4px);
+        }
+
+        .quiz-opts li.disabled {
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .quiz-opts li.opt-correct {
+            background: #e8f5e9;
+            border-color: #66bb6a;
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        .quiz-opts li.opt-correct::after {
+            content: ' ✓';
+            color: #2e7d32;
+            font-weight: 700;
+        }
+
+        .quiz-opts li.opt-wrong {
+            background: #fdecea;
+            border-color: #ef9a9a;
+            color: #c0392b;
+        }
+
+        .quiz-opts li.opt-wrong::after {
+            content: ' ✗';
+            color: #c0392b;
+            font-weight: 700;
+        }
+
+        .quiz-answer-note {
+            margin-top: 16px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            padding: 14px 20px;
+            background: #f5f9f5;
+            border-radius: 10px;
+            line-height: 1.8;
+            border-left: 3px solid var(--green-light);
+            display: none;
+            animation: fadeSlideIn 0.4s ease;
+        }
+
+        .quiz-answer-note.show {
+            display: block;
+        }
+
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 得分展示 */
+        .quiz-score-box {
+            background: linear-gradient(135deg, var(--green-mid), var(--green-dark));
+            border-radius: 18px;
+            padding: 36px;
+            text-align: center;
+            color: #fff;
+            margin-top: 30px;
+            box-shadow: 0 6px 30px rgba(90, 143, 90, 0.25);
+            display: none;
+            animation: fadeSlideIn 0.6s ease;
+        }
+
+        .quiz-score-box.show {
+            display: block;
+        }
+
+        .quiz-score-box .score-emoji {
+            font-size: 3.2rem;
+            margin-bottom: 10px;
+        }
+
+        .quiz-score-box .score-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+
+        .quiz-score-box .score-value {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 6px;
+        }
+
+        .quiz-score-box .score-desc {
+            font-size: 0.88rem;
+            opacity: 0.85;
+            line-height: 1.8;
+            max-width: 460px;
+            margin: 0 auto;
+        }
+
+        .quiz-reset-btn {
+            margin-top: 20px;
+            padding: 12px 36px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .quiz-reset-btn:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        /* ========== 个人报告 ========== */
+        .report-section {
+            background: linear-gradient(160deg, #e8f0e8 0%, #d4e6d4 100%);
+        }
+
+        .report-cards {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .poster-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            width: 100%;
+            max-width: 380px;
+            transition: transform 0.3s;
+        }
+
+        .poster-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .poster-header {
+            background: linear-gradient(135deg, var(--green-mid), var(--green-dark));
+            padding: 32px 25px 22px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .poster-header h4 {
+            font-size: 1.15rem;
+            letter-spacing: 4px;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .poster-header .poster-sub {
+            font-size: 0.72rem;
+            opacity: 0.8;
+            letter-spacing: 3px;
+        }
+
+        .poster-body {
+            padding: 28px 25px;
+            text-align: center;
+        }
+
+        .poster-avatar {
+            font-size: 3.2rem;
+            margin-bottom: 8px;
+        }
+
+        .poster-nickname {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--green-dark);
+            margin-bottom: 6px;
+        }
+
+        .poster-style {
+            display: inline-block;
+            padding: 4px 16px;
+            background: var(--green-pale);
+            color: var(--green-mid);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .poster-divider {
+            height: 1px;
+            background: #eef3ee;
+            margin: 16px 0;
+        }
+
+        .poster-stats {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .poster-stat-item .ps-num {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--green-dark);
+            display: block;
+            line-height: 1.3;
+        }
+
+        .poster-stat-item .ps-label {
+            font-size: 0.72rem;
+            color: #8a9a8a;
+            letter-spacing: 1px;
+        }
+
+        .poster-safety {
+            margin: 18px 0 12px;
+        }
+
+        .poster-safety .safety-score {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--green-dark);
+        }
+
+        .poster-safety .safety-label {
+            font-size: 0.78rem;
+            color: #8a9a8a;
+            letter-spacing: 1px;
+        }
+
+        .poster-safety .safety-bar {
+            width: 80%;
+            height: 8px;
+            background: #eef3ee;
+            border-radius: 4px;
+            margin: 12px auto 6px;
+            overflow: hidden;
+        }
+
+        .poster-safety .safety-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.8s ease, background 0.8s ease;
+        }
+
+        .poster-safety .safety-tag {
+            font-size: 0.78rem;
+            font-weight: 600;
+            transition: color 0.5s;
+        }
+
+        .poster-footer {
+            padding: 18px 25px 22px;
+            text-align: center;
+            border-top: 1px solid #eef3ee;
+        }
+
+        .poster-footer .poster-tagline {
+            font-size: 0.82rem;
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+
+        .poster-footer .poster-qr {
+            font-size: 0.68rem;
+            color: #a0b0a0;
+            letter-spacing: 1px;
+        }
+
+        .report-placeholder {
+            text-align: center;
+            padding: 60px 30px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .report-placeholder .ph-emoji {
+            font-size: 3.5rem;
+            margin-bottom: 16px;
+        }
+
+        .report-placeholder .ph-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--green-dark);
+            margin-bottom: 10px;
+        }
+
+        .report-placeholder .ph-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.9;
+        }
+
+        .report-placeholder .ph-arrow {
+            font-size: 1.5rem;
+            color: var(--green-mid);
+            margin-top: 16px;
+            display: block;
+        }
+
+        /* ========== 页脚 ========== */
+        .footer {
+            background: var(--green-dark);
+            color: #a8c9a8;
+            text-align: center;
+            padding: 44px 24px;
+            font-size: 0.85rem;
+            line-height: 2;
+        }
+
+        .footer a {
+            color: #d4e6d4;
+            text-decoration: none;
+        }
+
+        .footer .footer-brand {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+        }
+
+        /* ========== 响应式 ========== */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; letter-spacing: 3px; }
+            .hero .subtitle { font-size: 1rem; letter-spacing: 2px; }
+            .hero .hook-text { font-size: 0.95rem; }
+            .hero .hook-text .highlight { font-size: 1.2rem; }
+            .stat-number { font-size: 2rem; }
+            .stats-row { gap: 30px; }
+            .section-title { font-size: 1.5rem; }
+            .map-wrapper { flex-direction: column; }
+            .map-visual { flex: 1 1 100%; min-height: 320px; }
+            .rank-container { flex: 1 1 100%; }
+            .cards-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
+            .plant-card { padding: 16px 12px; }
+            .plant-emoji { font-size: 2rem; }
+            .compare-grid { grid-template-columns: 1fr; }
+            .quiz-item { padding: 22px 20px; }
+            .quiz-opts li { padding: 12px 16px; font-size: 0.86rem; }
+            .quiz-score-box { padding: 28px 22px; }
+            .trend-chart-static { padding: 24px 16px; }
+            .wordcloud-box { padding: 24px 16px; }
+            .wc-xl { font-size: 2rem; }
+            .wc-lg { font-size: 1.5rem; }
+            .wc-md { font-size: 1.2rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.7rem; }
+            .stat-number { font-size: 1.5rem; }
+            .section-title { font-size: 1.25rem; }
+            .hero .hook-text { font-size: 0.88rem; }
+            .quiz-opts li { padding: 10px 14px; font-size: 0.82rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== 序章 ==================== -->
+    <section class="hero">
+        <h1>“打野”热潮</h1>
+        <p class="subtitle">生态与安全图谱</p>
+        <div class="hook-text">
+            <p>2024年春天，一种新的周末生活方式悄然兴起——</p>
+            <p>他们带着小铲子、帆布袋，走进公园、山野、河堤……</p>
+            <p>社交平台上，他们管这叫——<span class="highlight">打野</span></p>
+        </div>
+        <div class="stats-row">
+            <div class="stat-item">
+                <span class="stat-number">128,000+</span>
+                <span class="stat-label">相关帖子数</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">3.6亿</span>
+                <span class="stat-label">话题阅读量</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">187</span>
+                <span class="stat-label">参与城市数</span>
+            </div>
+        </div>
+        <div class="hero-footer">↓ 向下滚动，揭开图谱 ↓</div>
+    </section>
+
+    <!-- ==================== 第一章：热度地图 ==================== -->
+    <section class="map-section">
+        <div class="container">
+            <h2 class="section-title">哪里的人在“打野”？</h2>
+            <div class="section-divider"></div>
+            <p class="section-desc">基于小红书、抖音、微博等平台“挖野菜”相关帖子的地域分布分析</p>
+
+            <div class="map-wrapper">
+                <div class="map-visual">
+                    <div class="map-svg-wrapper">
+                        <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="mapGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#d4e6d4;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#a8c9a8;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="hotGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#e07a5f;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#c0392b;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="hotGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#f2cc8f;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#e07a5f;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="hotGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#a8c9a8;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#5a8f5a;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <path d="M180 80 Q220 60 270 70 Q320 80 350 100 Q380 120 400 160 Q420 200 410 250 Q400 300 360 330 Q320 360 270 370 Q220 380 180 360 Q140 340 120 300 Q100 260 100 220 Q100 180 120 140 Q140 100 180 80Z" 
+                                  fill="url(#mapGrad)" stroke="#8aaa8a" stroke-width="1.5" opacity="0.7"/>
+                            <circle cx="280" cy="200" r="45" fill="url(#hotGrad1)" opacity="0.85"/>
+                            <circle cx="310" cy="260" r="38" fill="url(#hotGrad2)" opacity="0.8"/>
+                            <circle cx="240" cy="270" r="32" fill="url(#hotGrad2)" opacity="0.75"/>
+                            <circle cx="220" cy="170" r="28" fill="url(#hotGrad3)" opacity="0.7"/>
+                            <circle cx="330" cy="180" r="25" fill="url(#hotGrad3)" opacity="0.65"/>
+                            <circle cx="200" cy="230" r="22" fill="url(#hotGrad3)" opacity="0.6"/>
+                            <circle cx="300" cy="140" r="18" fill="url(#hotGrad3)" opacity="0.55"/>
+                            <circle cx="280" cy="200" r="4" fill="#fff" stroke="#c0392b" stroke-width="2"/>
+                            <circle cx="310" cy="260" r="4" fill="#fff" stroke="#e07a5f" stroke-width="2"/>
+                            <circle cx="240" cy="270" r="4" fill="#fff" stroke="#e07a5f" stroke-width="2"/>
+                            <circle cx="220" cy="170" r="4" fill="#fff" stroke="#5a8f5a" stroke-width="2"/>
+                            <circle cx="330" cy="180" r="4" fill="#fff" stroke="#5a8f5a" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <p style="margin-top:16px;font-size:0.78rem;color:#8a9a8a;letter-spacing:1px;">● 圆点大小代表讨论热度 · 红色为最高热度区域</p>
+                </div>
+
+                <div class="rank-container">
+                    <h3>🔥 热度 TOP10 省份</h3>
+                    <div class="rank-item">
+                        <span class="rank-num">1</span>
+                        <span class="rank-name">浙江</span>
+                        <span class="rank-value">18.6%</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-num">2</span>
+                        <span class="rank-name">江苏</span>
+                        <span class="rank-value">15.2%</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-num">3</span>
+                        <span class="rank-name">广东</span>
+                        <span class="rank-value">12.8%</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-num">4</span>
+                        <span class="rank-name">四川</span>
+                        <span class="rank-value">10.4%</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-num">5</span>
+                        <span class="rank-name">山东</span>
+                        <span class="rank-value">8.7%</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-num">6</span>
+                        <span class="rank-name">湖北</span>
+                        <span class="rank-value">7.3%</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-num">7</span>
+                        <span class="rank-name">湖南</span>
+                        <span class="rank-value">6.5%</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-num">8</span>
+                        <span class="rank-name">福建</span>
+                        <span class="rank-value">5.9%</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-num">9</span>
+                        <span class="rank-name">安徽</span>
+                        <span class="rank-value">5.1%</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-num">10</span>
+                        <span class="rank-name">北京</span>
+                        <span class="rank-value">4.6%</span>
+                    </div>
+                </div>
+            </div>
+            <p class="map-note">数据来源：社交媒体关键词爬取 · 时间范围：2024.1–2024.5 · 样本量：128,000条</p>
+        </div>
+    </section>
+
+    <!-- ==================== 第二章：词云与图鉴 ==================== -->
+    <section class="wordcloud-section">
+        <div class="container">
+            <h2 class="section-title">他们都在挖什么？</h2>
+            <div class="section-divider"></div>
+            <p class="section-desc">野菜种类词云 · 字体大小代表提及频次 · 颜色代表风险等级</p>
+
+            <div class="wordcloud-box">
+                <span class="wc-xl wc-green-dark">荠菜</span>
+                <span class="wc-lg wc-green-mid">蒲公英</span>
+                <span class="wc-md wc-orange">马齿苋</span>
+                <span class="wc-lg wc-green-mid">蕨菜</span>
+                <span class="wc-xl wc-green-dark">香椿</span>
+                <span class="wc-md wc-green-light">水芹</span>
+                <span class="wc-lg wc-orange">野葱</span>
+                <span class="wc-sm wc-brown">车前草</span>
+                <span class="wc-md wc-green-mid">艾草</span>
+                <span class="wc-lg wc-green-dark">槐花</span>
+                <span class="wc-sm wc-red">石龙芮</span>
+                <span class="wc-md wc-green-light">苦菜</span>
+                <span class="wc-lg wc-orange">竹笋</span>
+                <span class="wc-sm wc-brown">灰灰菜</span>
+                <span class="wc-md wc-green-mid">马兰头</span>
+                <span class="wc-xl wc-green-dark">笋</span>
+                <span class="wc-sm wc-red">毒芹</span>
+                <span class="wc-md wc-green-light">野蒜</span>
+                <span class="wc-lg wc-orange">枸杞头</span>
+                <span class="wc-sm wc-brown">刺儿菜</span>
+                <span class="wc-md wc-green-mid">榆钱</span>
+                <span class="wc-lg wc-green-dark">蕨根粉</span>
+                <span class="wc-sm wc-red">曼陀罗</span>
+                <span class="wc-md wc-green-light">野韭菜</span>
+                <span class="wc-lg wc-orange">春笋</span>
+                <span class="wc-sm wc-brown">车前子</span>
+                <span class="wc-md wc-green-mid">紫苏</span>
+                <span class="wc-xl wc-green-dark">野菜</span>
+                <span class="wc-sm wc-red">苍耳</span>
+            </div>
+
+            <h3 style="text-align:center;color:var(--green-dark);margin-bottom:28px;font-size:1.15rem;letter-spacing:2px;">🌿 热门野菜图鉴</h3>
+
+            <div class="cards-grid">
+                <div class="plant-card">
+                    <span class="risk-tag risk-low">安全</span>
+                    <span class="plant-emoji">🌱</span>
+                    <div class="plant-name">荠菜</div>
+                    <div class="plant-heat">提及量 28.6k</div>
+                    <div class="plant-desc">春季最早冒头的野菜之一，叶片羽状分裂，有清香。可包饺子、做汤。</div>
+                </div>
+                <div class="plant-card">
+                    <span class="risk-tag risk-low">安全</span>
+                    <span class="plant-emoji">🌼</span>
+                    <div class="plant-name">蒲公英</div>
+                    <div class="plant-heat">提及量 22.1k</div>
+                    <div class="plant-desc">嫩叶可凉拌，花可泡茶。注意与有毒的猫耳草区分，后者叶片有绒毛。</div>
+                </div>
+                <div class="plant-card">
+                    <span class="risk-tag risk-mid">谨慎</span>
+                    <span class="plant-emoji">🌿</span>
+                    <div class="plant-name">蕨菜</div>
+                    <div class="plant-heat">提及量 19.8k</div>
+                    <div class="plant-desc">需焯水去除原蕨苷。过量食用有致癌风险，建议偶尔尝鲜。</div>
+                </div>
+                <div class="plant-card">
+                    <span class="risk-tag risk-low">安全</span>
+                    <span class="plant-emoji">🌳</span>
+                    <div class="plant-name">香椿</div>
+                    <div class="plant-heat">提及量 17.5k</div>
+                    <div class="plant-desc">春季限定美味，炒蛋、拌豆腐皆宜。亚硝酸盐含量较高，需焯水后食用。</div>
+                </div>
+                <div class="plant-card">
+                    <span class="risk-tag risk-mid">谨慎</span>
+                    <span class="plant-emoji">💧</span>
+                    <div class="plant-name">水芹</div>
+                    <div class="plant-heat">提及量 14.2k</div>
+                    <div class="plant-desc">生长在水边，茎有纵棱。极易与剧毒的毒芹混淆，务必仔细辨别。</div>
+                </div>
+                <div class="plant-card">
+                    <span class="risk-tag risk-low">安全</span>
+                    <span class="plant-emoji">🧄</span>
+                    <div class="plant-name">野葱</div>
+                    <div class="plant-heat">提及量 12.7k</div>
+                    <div class="plant-desc">有浓郁葱蒜味，可炒蛋、做饼。注意与有毒的石蒜区分，后者无葱味。</div>
+                </div>
+                <div class="plant-card">
+                    <span class="risk-tag risk-low">安全</span>
+                    <span class="plant-emoji">🌾</span>
+                    <div class="plant-name">马齿苋</div>
+                    <div class="plant-heat">提及量 11.3k</div>
+                    <div class="plant-desc">茎叶肉质，酸甜可口。可凉拌、做馅。脾胃虚寒者少食。</div>
+                </div>
+                <div class="plant-card">
+                    <span class="risk-tag risk-high">危险</span>
+                    <span class="plant-emoji">☠️</span>
+                    <div class="plant-name">石龙芮</div>
+                    <div class="plant-heat">误食事件 23起</div>
+                    <div class="plant-desc">常与水芹混淆，全株有毒。叶片掌状分裂，开黄色小花，气味刺鼻。</div>
+                </div>
+                <div class="plant-card">
+                    <span class="risk-tag risk-high">危险</span>
+                    <span class="plant-emoji">☠️</span>
+                    <div class="plant-name">毒芹</div>
+                    <div class="plant-heat">误食事件 11起</div>
+                    <div class="plant-desc">剧毒！茎上有紫色斑点，根部有恶臭。误食可致死，切勿采摘。</div>
+                </div>
+                <div class="plant-card">
+                    <span class="risk-tag risk-low">安全</span>
+                    <span class="plant-emoji">🌿</span>
+                    <div class="plant-name">艾草</div>
+                    <div class="plant-heat">提及量 10.8k</div>
+                    <div class="plant-desc">清明前后最嫩，可做青团。有特殊香气，与有毒的豚草容易区分。</div>
+                </div>
+            </div>
+
+            <div class="compare-section">
+                <h3>⚠️ 易混淆警示：可食用 vs 有毒</h3>
+                <div class="compare-grid">
+                    <div class="compare-pair">
+                        <div class="pair-label">水边植物</div>
+                        <div class="pair-item">
+                            <span class="pair-emoji">🌿</span>
+                            <div class="pair-text">
+                                <div class="pair-name safe">水芹（可食用）</div>
+                                <div class="pair-note">茎有纵棱，气味清香</div>
+                            </div>
+                        </div>
+                        <div class="pair-item">
+                            <span class="pair-emoji">☠️</span>
+                            <div class="pair-text">
+                                <div class="pair-name danger">毒芹（有毒）</div>
+                                <div class="pair-note">茎有紫色斑点，气味难闻</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="compare-pair">
+                        <div class="pair-label">田间杂草</div>
+                        <div class="pair-item">
+                            <span class="pair-emoji">🌱</span>
+                            <div class="pair-text">
+                                <div class="pair-name safe">荠菜（可食用）</div>
+                                <div class="pair-note">叶片羽状分裂，有清香</div>
+                            </div>
+                        </div>
+                        <div class="pair-item">
+                            <span class="pair-emoji">☠️</span>
+                            <div class="pair-text">
+                                <div class="pair-name danger">石龙芮（有毒）</div>
+                                <div class="pair-note">叶片掌状分裂，开黄花</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 第三章：趋势折线图 ==================== -->
+    <section class="trend-section">
+        <div class="container">
+            <h2 class="section-title">这股热潮从何而起？</h2>
+            <div class="section-divider"></div>
+            <p class="section-desc">2023.1–2024.6 “打野”话题热度趋势 · 三个平台对比</p>
+
+            <div class="trend-chart-static">
+                <div class="trend-legend">
+                    <div class="legend-item"><span class="legend-dot red"></span> 小红书</div>
+                    <div class="legend-item"><span class="legend-dot blue"></span> 抖音</div>
+                    <div class="legend-item"><span class="legend-dot gold"></span> 微博</div>
+                </div>
+                <div class="trend-svg-wrapper">
+                    <svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg">
+                        <line x1="60" y1="20" x2="60" y2="270" stroke="#e0ebe0" stroke-width="1"/>
+                        <line x1="60" y1="270" x2="760" y2="270" stroke="#e0ebe0" stroke-width="1"/>
+                        <line x1="60" y1="220" x2="760" y2="220" stroke="#eef3ee" stroke-width="1"/>
+                        <line x1="60" y1="170" x2="760" y2="170" stroke="#eef3ee" stroke-width="1"/>
+                        <line x1="60" y1="120" x2="760" y2="120" stroke="#eef3ee" stroke-width="1"/>
+                        <line x1="60" y1="70" x2="760" y2="70" stroke="#eef3ee" stroke-width="1"/>
+                        <line x1="60" y1="20" x2="760" y2="20" stroke="#eef3ee" stroke-width="1"/>
+
+                        <text x="52" y="274" text-anchor="end" font-size="10" fill="#8a9a8a">0</text>
+                        <text x="52" y="224" text-anchor="end" font-size="10" fill="#8a9a8a">20</text>
+                        <text x="52" y="174" text-anchor="end" font-size="10" fill="#8a9a8a">40</text>
+                        <text x="52" y="124" text-anchor="end" font-size="10" fill="#8a9a8a">60</text>
+                        <text x="52" y="74" text-anchor="end" font-size="10" fill="#8a9a8a">80</text>
+                        <text x="52" y="24" text-anchor="end" font-size="10" fill="#8a9a8a">100</text>
+
+                        <text x="80" y="290" text-anchor="middle" font-size="10" fill="#8a9a8a">1月</text>
+                        <text x="145" y="290" text-anchor="middle" font-size="10" fill="#8a9a8a">3月</text>
+                        <text x="210" y="290" text-anchor="middle" font-size="10" fill="#8a9a8a">5月</text>
+                        <text x="275" y="290" text-anchor="middle" font-size="10" fill="#8a9a8a">7月</text>
+                        <text x="340" y="290" text-anchor="middle" font-size="10" fill="#8a9a8a">9月</text>
+                        <text x="405" y="290" text-anchor="middle" font-size="10" fill="#8a9a8a">11月</text>
+                        <text x="470" y="290" text-anchor="middle" font-size="10" fill="#8a9a8a">1月</text>
+                        <text x="535" y="290" text-anchor="middle" font-size="10" fill="#8a9a8a">3月</text>
+                        <text x="600" y="290" text-anchor="middle" font-size="10" fill="#8a9a8a">5月</text>
+
+                        <polyline points="80,265 145,260 210,255 275,250 340,248 405,245 470,240 535,100 600,60" 
+                                  fill="none" stroke="#e07a5f" stroke-width="2.5" stroke-linejoin="round"/>
+                        <circle cx="80" cy="265" r="3" fill="#e07a5f"/>
+                        <circle cx="145" cy="260" r="3" fill="#e07a5f"/>
+                        <circle cx="210" cy="255" r="3" fill="#e07a5f"/>
+                        <circle cx="275" cy="250" r="3" fill="#e07a5f"/>
+                        <circle cx="340" cy="248" r="3" fill="#e07a5f"/>
+                        <circle cx="405" cy="245" r="3" fill="#e07a5f"/>
+                        <circle cx="470" cy="240" r="3" fill="#e07a5f"/>
+                        <circle cx="535" cy="100" r="4" fill="#e07a5f"/>
+                        <circle cx="600" cy="60" r="4" fill="#e07a5f"/>
+
+                        <polyline points="80,268 145,265 210,262 275,258 340,256 405,252 470,248 535,140 600,110" 
+                                  fill="none" stroke="#5a8f5a" stroke-width="2.5" stroke-linejoin="round"/>
+                        <circle cx="80" cy="268" r="3" fill="#5a8f5a"/>
+                        <circle cx="145" cy="265" r="3" fill="#5a8f5a"/>
+                        <circle cx="210" cy="262" r="3" fill="#5a8f5a"/>
+                        <circle cx="275" cy="258" r="3" fill="#5a8f5a"/>
+                        <circle cx="340" cy="256" r="3" fill="#5a8f5a"/>
+                        <circle cx="405" cy="252" r="3" fill="#5a8f5a"/>
+                        <circle cx="470" cy="248" r="3" fill="#5a8f5a"/>
+                        <circle cx="535" cy="140" r="4" fill="#5a8f5a"/>
+                        <circle cx="600" cy="110" r="4" fill="#5a8f5a"/>
+
+                        <polyline points="80,270 145,268 210,266 275,264 340,262 405,260 470,258 535,180 600,150" 
+                                  fill="none" stroke="#f2cc8f" stroke-width="2.5" stroke-linejoin="round"/>
+                        <circle cx="80" cy="270" r="3" fill="#f2cc8f"/>
+                        <circle cx="145" cy="268" r="3" fill="#f2cc8f"/>
+                        <circle cx="210" cy="266" r="3" fill="#f2cc8f"/>
+                        <circle cx="275" cy="264" r="3" fill="#f2cc8f"/>
+                        <circle cx="340" cy="262" r="3" fill="#f2cc8f"/>
+                        <circle cx="405" cy="260" r="3" fill="#f2cc8f"/>
+                        <circle cx="470" cy="258" r="3" fill="#f2cc8f"/>
+                        <circle cx="535" cy="180" r="4" fill="#f2cc8f"/>
+                        <circle cx="600" cy="150" r="4" fill="#f2cc8f"/>
+
+                        <rect x="520" y="80" width="8" height="8" fill="#e07a5f" opacity="0.6"/>
+                        <text x="540" y="75" font-size="9" fill="#c0392b" font-weight="600">爆发期</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="trend-insight">
+                <strong>📌 趋势解读：</strong>2023年春季首次出现小范围讨论，2024年3月突然爆发——媒体报道、网红带动与春季营销共同推动。4月安全事件引发广泛讨论，热度达到峰值后回落，但整体仍高于去年同期。值得注意的是，春季（3–5月）是绝对高峰，“打野”行为具有强烈的季节性。
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 第四章：安全测试（交互式选答） ==================== -->
+    <section class="quiz-section">
+        <div class="container">
+            <h2 class="section-title">你真的会“打野”吗？</h2>
+            <div class="section-divider"></div>
+            <p class="section-desc">点击选择答案 · 答对答错都会显示解析 · 最终根据正确率生成报告</p>
+
+            <div class="quiz-interactive" id="quizInteractive">
+                <!-- 题目通过 JS 动态渲染 -->
+                <div id="quizItemsContainer"></div>
+
+                <!-- 得分展示 -->
+                <div class="quiz-score-box" id="quizScoreBox">
+                    <div class="score-emoji" id="scoreEmoji">🏆</div>
+                    <div class="score-title" id="scoreTitle"></div>
+                    <div class="score-value" id="scoreValue"></div>
+                    <div class="score-desc" id="scoreDesc"></div>
+                    <button class="quiz-reset-btn" id="quizResetBtn">🔄 重新测试</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 终章：个人报告（根据答题正确率动态生成） ==================== -->
+    <section class="report-section">
+        <div class="container">
+            <h2 class="section-title">我的“打野”报告</h2>
+            <div class="section-divider"></div>
+            <p class="section-desc" id="reportDesc">完成上方安全测试后，这里将根据你的正确率生成专属报告</p>
+
+            <div class="report-cards" id="reportCards">
+                <!-- 未答题时显示占位 -->
+                <div class="report-placeholder" id="reportPlaceholder">
+                    <div class="ph-emoji">📋</div>
+                    <div class="ph-title">尚未生成报告</div>
+                    <div class="ph-desc">请先完成上方的“打野”安全测试<br>系统将根据你的正确率生成专属报告</div>
+                    <span class="ph-arrow">↑ 去答题 ↑</span>
+                </div>
+
+                <!-- 报告卡片（答题后显示） -->
+                <div class="poster-card" id="posterCard" style="display:none;">
+                    <div class="poster-header">
+                        <h4>打野报告</h4>
+                        <div class="poster-sub">2024 · 春季版</div>
+                    </div>
+                    <div class="poster-body">
+                        <div class="poster-avatar" id="posterAvatar">🌿</div>
+                        <div class="poster-nickname" id="posterNickname">野菜小达人</div>
+                        <div class="poster-style" id="posterStyle">🌱 佛系散步型</div>
+
+                        <div class="poster-divider"></div>
+
+                        <div class="poster-stats">
+                            <div class="poster-stat-item">
+                                <span class="ps-num" id="psCorrect">0</span>
+                                <span class="ps-label">答对题数</span>
+                            </div>
+                            <div class="poster-stat-item">
+                                <span class="ps-num" id="psTotal">5</span>
+                                <span class="ps-label">总题数</span>
+                            </div>
+                            <div class="poster-stat-item">
+                                <span class="ps-num" id="psRate">0%</span>
+                                <span class="ps-label">正确率</span>
+                            </div>
+                        </div>
+
+                        <div class="poster-divider"></div>
+
+                        <div class="poster-safety">
+                            <div class="safety-score" id="posterSafetyScore">0</div>
+                            <div class="safety-label">安全指数</div>
+                            <div class="safety-bar">
+                                <div class="safety-fill" id="posterSafetyFill" style="width:0%;background:linear-gradient(90deg,#5a8f5a,#3a5e3a);"></div>
+                            </div>
+                            <div class="safety-tag" id="posterSafetyTag" style="color:#5a8f5a;">请先完成测试</div>
+                        </div>
+
+                        <div class="poster-divider"></div>
+
+                        <div style="font-size:0.82rem;color:#6a8a6a;line-height:1.8;" id="posterExtraInfo">
+                            🌟 最常采摘：荠菜 · 蒲公英 · 马齿苋<br>
+                            📍 常去区域：城市公园 · 近郊河堤
+                        </div>
+                    </div>
+                    <div class="poster-footer">
+                        <div class="poster-tagline" id="posterTagline">“不认识的坚决不采，不确定的坚决不吃”</div>
+                        <div class="poster-qr">扫码查看完整图谱 · 打野安全指南</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 页脚 ==================== -->
+    <footer class="footer">
+        <div class="footer-brand">“打野”热潮 · 生态与安全图谱</div>
+        <p>数据来源：小红书 / 抖音 / 微博 公开数据 · 时间范围：2024.1–2024.5</p>
+        <p>本页面为数据可视化作品，所有内容仅供学习参考，不构成采摘建议。</p>
+        <p style="margin-top:12px;opacity:0.6;">🌿 爱护自然 · 安全采摘 · 可持续“打野” 🌿</p>
+    </footer>
+
+    <script>
+        // ==================== 题库数据 ====================
+        const questions = [
+            {
+                q: '在野外看到一片类似水芹的植物，你应该？',
+                opts: [
+                    '直接采摘，回家炒着吃',
+                    '仔细观察茎上是否有紫色斑点，闻气味',
+                    '拍张照片发朋友圈，让大家认认',
+                    '看起来像就能吃，无所谓'
+                ],
+                correct: 1,
+                note: '✅ 正确答案：B。水芹与剧毒的毒芹极易混淆，毒芹茎上有紫色斑点且气味难闻。采摘前务必仔细辨别，不确定时绝不采摘。'
+            },
+            {
+                q: '蕨菜含有原蕨苷，正确的处理方式是？',
+                opts: [
+                    '直接清炒，保持鲜嫩口感',
+                    '生吃凉拌，营养不流失',
+                    '沸水焯烫5分钟以上，再烹饪',
+                    '晒干后直接食用'
+                ],
+                correct: 2,
+                note: '✅ 正确答案：C。原蕨苷是水溶性的，沸水焯烫可去除大部分。即便如此，也不建议长期大量食用蕨菜。'
+            },
+            {
+                q: '以下哪种环境生长的野菜不建议采摘？',
+                opts: [
+                    '远离公路的深山',
+                    '自家后院的菜地边',
+                    '工厂附近或公路两旁的绿化带',
+                    '有机农场周边的林地'
+                ],
+                correct: 2,
+                note: '✅ 正确答案：C。工厂附近可能有重金属污染，公路两旁有汽车尾气和融雪剂残留，这些地方的野菜容易富集有害物质。'
+            },
+            {
+                q: '采摘野菜时，以下哪个做法是正确的？',
+                opts: [
+                    '连根拔起，方便辨认',
+                    '只采摘嫩叶，保留根部让植物继续生长',
+                    '整片区域全部采光',
+                    '看到不认识的也顺便采回去研究'
+                ],
+                correct: 1,
+                note: '✅ 正确答案：B。可持续采摘才能让野菜资源延续。连根拔起和整片采光会破坏生态，不认识的植物坚决不采。'
+            },
+            {
+                q: '如果不小心误食了有毒野菜，第一时间应该？',
+                opts: [
+                    '喝大量牛奶解毒',
+                    '在家观察一下再说',
+                    '立即就医，并带上剩余植物样本',
+                    '自行催吐后继续观察'
+                ],
+                correct: 2,
+                note: '✅ 正确答案：C。误食有毒植物后应立即就医，带上植物样本能帮助医生快速确定毒素类型。不要盲目自行处理。'
+            }
+        ];
+
+        // ==================== 状态 ====================
+        let answered = new Array(questions.length).fill(false);
+        let correctCount = 0;
+        let totalAnswered = 0;
+
+        const quizItemsContainer = document.getElementById('quizItemsContainer');
+        const quizScoreBox = document.getElementById('quizScoreBox');
+        const scoreEmoji = document.getElementById('scoreEmoji');
+        const scoreTitle = document.getElementById('scoreTitle');
+        const scoreValue = document.getElementById('scoreValue');
+        const scoreDesc = document.getElementById('scoreDesc');
+        const quizResetBtn = document.getElementById('quizResetBtn');
+
+        const reportPlaceholder = document.getElementById('reportPlaceholder');
+        const posterCard = document.getElementById('posterCard');
+        const posterAvatar = document.getElementById('posterAvatar');
+        const posterNickname = document.getElementById('posterNickname');
+        const posterStyle = document.getElementById('posterStyle');
+        const psCorrect = document.getElementById('psCorrect');
+        const psTotal = document.getElementById('psTotal');
+        const psRate = document.getElementById('psRate');
+        const posterSafetyScore = document.getElementById('posterSafetyScore');
+        const posterSafetyFill = document.getElementById('posterSafetyFill');
+        const posterSafetyTag = document.getElementById('posterSafetyTag');
+        const posterTagline = document.getElementById('posterTagline');
+        const posterExtraInfo = document.getElementById('posterExtraInfo');
+        const reportDesc = document.getElementById('reportDesc');
+
+        // ==================== 渲染题目 ====================
+        function renderQuestions() {
+            quizItemsContainer.innerHTML = '';
+            questions.forEach((q, qIndex) => {
+                const item = document.createElement('div');
+                item.className = 'quiz-item';
+                item.id = 'quizItem-' + qIndex;
+
+                const qNum = document.createElement('span');
+                qNum.className = 'quiz-q-num';
+                qNum.textContent = 'Q' + (qIndex + 1);
+
+                const qText = document.createElement('div');
+                qText.className = 'quiz-q-text';
+                qText.textContent = q.q;
+
+                const optsList = document.createElement('ul');
+                optsList.className = 'quiz-opts';
+
+                q.opts.forEach((optText, oIndex) => {
+                    const li = document.createElement('li');
+                    li.textContent = String.fromCharCode(65 + oIndex) + '. ' + optText;
+                    li.dataset.qIndex = qIndex;
+                    li.dataset.oIndex = oIndex;
+                    li.addEventListener('click', () => handleSelect(qIndex, oIndex));
+                    optsList.appendChild(li);
+                });
+
+                const note = document.createElement('div');
+                note.className = 'quiz-answer-note';
+                note.id = 'note-' + qIndex;
+                note.textContent = q.note;
+
+                item.appendChild(qNum);
+                item.appendChild(qText);
+                item.appendChild(optsList);
+                item.appendChild(note);
+                quizItemsContainer.appendChild(item);
+            });
+        }
+
+        // ==================== 处理选择 ====================
+        function handleSelect(qIndex, oIndex) {
+            if (answered[qIndex]) return;
+            answered[qIndex] = true;
+            totalAnswered++;
+
+            const item = document.getElementById('quizItem-' + qIndex);
+            const opts = item.querySelectorAll('.quiz-opts li');
+            const note = document.getElementById('note-' + qIndex);
+            const correctIndex = questions[qIndex].correct;
+
+            opts.forEach((li, idx) => {
+                li.classList.add('disabled');
+                if (idx === correctIndex) {
+                    li.classList.add('opt-correct');
+                }
+                if (idx === oIndex && idx !== correctIndex) {
+                    li.classList.add('opt-wrong');
+                }
+            });
+
+            if (oIndex === correctIndex) {
+                correctCount++;
+            }
+
+            note.classList.add('show');
+            item.classList.add('answered');
+
+            if (totalAnswered === questions.length) {
+                showScore();
+                updateReport();
+            }
+        }
+
+        // ==================== 显示得分 ====================
+        function showScore() {
+            const rate = Math.round((correctCount / questions.length) * 100);
+            let emoji, title, desc;
+
+            if (rate === 100) {
+                emoji = '🏆';
+                title = '安全打野达人';
+                desc = '你具备扎实的野菜辨识知识和安全意识，是朋友圈里值得信赖的“打野”顾问。继续保持谨慎态度，享受自然的同时保护好自己。';
+            } else if (rate >= 80) {
+                emoji = '🌟';
+                title = '优秀打野选手';
+                desc = '你的安全意识很不错，大部分野菜知识都掌握了。再巩固一下易混淆植物的辨别，就能成为真正的专家。';
+            } else if (rate >= 60) {
+                emoji = '🌿';
+                title = '入门打野选手';
+                desc = '你有一些基础认知，但还需要多加学习。建议采摘前务必查阅资料或请教有经验的人，安全第一。';
+            } else if (rate >= 40) {
+                emoji = '⚠️';
+                title = '需要提高警惕';
+                desc = '你的野菜安全知识还有较大提升空间。野外采摘有风险，建议先系统学习再出发，切勿盲目动手。';
+            } else {
+                emoji = '🚨';
+                title = '危险打野新手';
+                desc = '你的安全知识严重不足，盲目采摘可能带来严重后果。强烈建议先学习野菜辨识和安全常识，或跟随专业人士出行。';
+            }
+
+            scoreEmoji.textContent = emoji;
+            scoreTitle.textContent = title;
+            scoreValue.textContent = `答对 ${correctCount} / ${questions.length} 题 · 正确率 ${rate}%`;
+            scoreDesc.textContent = desc;
+            quizScoreBox.classList.add('show');
+
+            setTimeout(() => {
+                quizScoreBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300);
+        }
+
+        // ==================== 更新报告 ====================
+        function updateReport() {
+            const rate = Math.round((correctCount / questions.length) * 100);
+            const safetyScore = rate;
+
+            reportPlaceholder.style.display = 'none';
+            posterCard.style.display = 'block';
+            reportDesc.textContent = '根据你的答题正确率生成的专属“打野”报告';
+
+            psCorrect.textContent = correctCount;
+            psTotal.textContent = questions.length;
+            psRate.textContent = rate + '%';
+            posterSafetyScore.textContent = safetyScore;
+            posterSafetyFill.style.width = safetyScore + '%';
+
+            let avatar, nickname, style, tagline, extraInfo, fillGradient, tagColor, tagText;
+
+            if (rate === 100) {
+                avatar = '🏆';
+                nickname = '野菜专家';
+                style = '🥇 全能型打野选手';
+                tagline = '“识遍百草，安全第一”';
+                extraInfo = '🌟 最常采摘：荠菜 · 蒲公英 · 马齿苋<br>📍 常去区域：深山老林 · 有机农场周边';
+                fillGradient = 'linear-gradient(90deg, #2e7d32, #1b5e20)';
+                tagColor = '#2e7d32';
+                tagText = '✅ 顶级安全达人';
+            } else if (rate >= 80) {
+                avatar = '🌿';
+                nickname = '野菜小达人';
+                style = '🌱 佛系散步型';
+                tagline = '“不认识的坚决不采，不确定的坚决不吃”';
+                extraInfo = '🌟 最常采摘：荠菜 · 蒲公英 · 马齿苋<br>📍 常去区域：城市公园 · 近郊河堤';
+                fillGradient = 'linear-gradient(90deg, #5a8f5a, #3a5e3a)';
+                tagColor = '#5a8f5a';
+                tagText = '✅ 安全型打野选手';
+            } else if (rate >= 60) {
+                avatar = '🌱';
+                nickname = '入门探索者';
+                style = '🎒 装备党';
+                tagline = '“多看多问，慢慢积累”';
+                extraInfo = '🌟 最常采摘：蒲公英 · 艾草 · 野葱<br>📍 常去区域：郊野公园 · 河滩草地';
+                fillGradient = 'linear-gradient(90deg, #f2cc8f, #e07a5f)';
+                tagColor = '#b8860b';
+                tagText = '⚠️ 还需多加学习';
+            } else if (rate >= 40) {
+                avatar = '⚠️';
+                nickname = '谨慎新手';
+                style = '📖 学习中';
+                tagline = '“安全知识是最好的装备”';
+                extraInfo = '🌟 建议先学习：野菜图鉴 · 安全指南<br>📍 推荐活动：跟随专业人士出行';
+                fillGradient = 'linear-gradient(90deg, #e07a5f, #c0392b)';
+                tagColor = '#c0392b';
+                tagText = '⚠️ 安全意识待加强';
+            } else {
+                avatar = '🚨';
+                nickname = '危险新手';
+                style = '❌ 亟需学习';
+                tagline = '“盲目采摘，害人害己”';
+                extraInfo = '🌟 强烈建议：先系统学习野菜知识<br>📍 切勿独自采摘不认识的植物';
+                fillGradient = 'linear-gradient(90deg, #c0392b, #8b0000)';
+                tagColor = '#c0392b';
+                tagText = '🚨 安全风险高';
+            }
+
+            posterAvatar.textContent = avatar;
+            posterNickname.textContent = nickname;
+            posterStyle.textContent = style;
+            posterTagline.textContent = tagline;
+            posterExtraInfo.innerHTML = extraInfo;
+            posterSafetyFill.style.background = fillGradient;
+            posterSafetyTag.style.color = tagColor;
+            posterSafetyTag.textContent = tagText;
+
+            setTimeout(() => {
+                posterCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 500);
+        }
+
+        // ==================== 重置 ====================
+        function resetQuiz() {
+            answered = new Array(questions.length).fill(false);
+            correctCount = 0;
+            totalAnswered = 0;
+
+            renderQuestions();
+            quizScoreBox.classList.remove('show');
+
+            reportPlaceholder.style.display = 'block';
+            posterCard.style.display = 'none';
+            reportDesc.textContent = '完成上方安全测试后，这里将根据你的正确率生成专属报告';
+
+            document.getElementById('quizInteractive').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        quizResetBtn.addEventListener('click', resetQuiz);
+
+        // ==================== 初始化（关键修复） ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            renderQuestions();
+        });
+    </script>
+
+</body>
+</html>
